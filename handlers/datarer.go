@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/Abdirahman04/jama/service"
 	"github.com/Abdirahman04/jama/types"
 )
 
@@ -16,7 +17,9 @@ func Datarer(w http.ResponseWriter, r *http.Request) {
     return
   }
 
-  jsn, err := json.Marshal(data)
+  newData := service.GetObjs(data)
+
+  jsn, err := json.Marshal(newData)
   if err != nil {
     w.WriteHeader(http.StatusInternalServerError)
     w.Write([]byte("error marshalling response"))
